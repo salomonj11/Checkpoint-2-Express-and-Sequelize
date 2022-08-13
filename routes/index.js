@@ -20,4 +20,12 @@ router.get('/users/:name/tasks', async (req, res, next) => {
   }
 });
 
+router.put('/:index', async (req, res, next) => {
+  try {
+    console.log(todos.complete(req.params.id));
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
