@@ -17,22 +17,40 @@ module.exports = {
 
   // ==== COMPLETE THE FOLLOWING (SEE `model.js` TEST SPEC) =====
   listPeople: function () {
-    // returns an array of all people for whom tasks exist
+    return Object.keys(tasks);
   },
 
   add: function (name, task) {
-    // saves a task for a given person
+    let total;
+
+    if (tasks[name]) {
+      total = tasks[name].length;
+      tasks[name].push(task);
+      if (!tasks[name][total].complete) {
+        tasks[name][total].complete = false;
+      }
+    } else {
+      tasks[name] = [];
+      tasks[name].push(task);
+      if (!tasks[name][0].complete) {
+        tasks[name][0].complete = false;
+      }
+    }
   },
 
   list: function (name) {
-    // returns tasks for specified person
+    if (name in tasks) {
+      return tasks[name];
+    } else {
+      console.log('NOT IN OBJECT!');
+    }
   },
 
   complete: function (name, idx) {
-    // marks a task complete
+    return (tasks[name][idx].complete = true);
   },
 
   remove: function (name, idx) {
-    // removes a tasks
+    return tasks[name].splice(idx, 1);
   },
 };
